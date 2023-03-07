@@ -21,7 +21,6 @@ Create a settings.json file (in the app folder) to customize, sample:
 {
   "downloadFolder": "~/Pictures/Amazon Photos",
   "rootUrl": "https://amazon.fr/photos",
-  "chromePath": "~/AppData/Local/Google/Chrome/chrome.exe"
 }
 ```
 
