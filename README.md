@@ -13,7 +13,7 @@ Backup Amazon Photos albums locally.
 
 Defaults:
 * https://amazon.com/photos
-* Google Chrome mac
+* Google Chrome win/mac
 * Home folder (~/ replaced with user home folder; downloadFolder must exist)
 
 Create a settings.json file (in the app folder) to customize, sample:
