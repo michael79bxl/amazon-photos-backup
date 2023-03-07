@@ -4,11 +4,11 @@ const spawn = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const settings = {
-  chromePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
-  downloadFolder: '~/Pictures/Amazon Photos',
+const defaults = {
+  chromePath: '',
+  downloadFolder: '~/',
+  rootUrl: 'https://amazon.com/photos',
   downloadFile: 'AmazonPhotos.zip',
-  rootUrl: 'https://www.amazon.fr/photos',
   albumsUrl: '/albums?sort=sortDateModified',
   albumSelector: '#amazon-photos .album-node',
   albumSelectorLink: '.node-link',
@@ -19,6 +19,17 @@ const settings = {
   albumSelectorDownload: 'button.download',
   albumSelectorMultiple: '.mass-download button.download',
 };
+
+let settings = defaults;
+if (fs.existsSync('settings.json')) settings = JSON.parse(fs.readFileSync('settings.json'));
+Object.keys(defaults).forEach(function(key) {
+  if (!(key in settings)) settings[key] = defaults[key];
+});
+
+if (settings.chromePath === '') {
+  if (os.platform() === 'darwin') settings.chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+}
+console.log(settings);
 
 if (settings.downloadFolder.indexOf('~/') === 0) {
   settings.downloadFolder = path.join(os.homedir(), settings.downloadFolder.substring(2));
