@@ -28,8 +28,13 @@ Object.keys(defaults).forEach(function(key) {
 
 if (settings.chromePath === '') {
   if (os.platform() === 'darwin') settings.chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+  if (os.platform() === 'win32') settings.chromePath = '~/AppData/Local/Google/Chrome/chrome.exe';
 }
 console.log(settings);
+
+if (settings.chromePath.indexOf('~/') === 0) {
+  settings.chromePath = path.join(os.homedir(), settings.chromePath.substring(2));
+}
 
 if (settings.downloadFolder.indexOf('~/') === 0) {
   settings.downloadFolder = path.join(os.homedir(), settings.downloadFolder.substring(2));
